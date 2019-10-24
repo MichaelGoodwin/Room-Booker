@@ -1,0 +1,120 @@
+.home-logo{
+  background: url(/assets/meeting-room-darkened.jpg) no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  display: table;
+  width: 100%;
+  height: calc(100vh - 60px);
+  position: relative;
+}
+
+.hero-text{
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  margin: 5px inherit;
+
+  h4, div{
+    padding-top: 10px;
+  }
+}
+
+.hero-shape{
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 75px;
+
+  svg{
+    height: 100%;
+    width: 100%;
+  }
+}
+
+h1{
+  font-size: 6rem;
+}
+
+@media (max-width: 768px) {
+  h1{
+    font-size: 4rem;
+  }
+  h2{
+    font-size: 1.5rem;
+  }
+  .hero-shape{
+    height: 40px;
+  }
+}
+
+#info-container{
+  background-color: white;
+  color: black;
+
+  #info{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 5vh;
+  }
+
+  h5{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  div{
+    padding-top: 5vh;
+  }
+}
+
+$free: green;
+$progress: orange;
+$booked: red;
+
+.color-codes{
+  li{
+    display: inline-block;
+    position: relative;
+    padding: 0 0 0 32px;
+    margin-left: 25px;
+    font-weight: 600;
+
+    &:first-of-type{
+      margin-left: 0px;
+    }
+
+    &:before{
+      content: '';
+      position: absolute;
+      display: block;
+      left: 0;
+      top: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 12px;
+    }
+  }
+
+  .color-free{
+    color: $free;
+    &:before{
+      background-color: $free;
+    }
+  }
+
+  .color-progress{
+    color: $progress;
+    &:before{
+      background-color: $progress;
+    }
+  }
+
+  .color-booked{
+    color: $booked;
+    &:before{
+      background-color: $booked;
+    }
+  }
+}

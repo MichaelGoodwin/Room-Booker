@@ -1,0 +1,62 @@
+<div class="home-logo">
+  <div class="hero-text text-center">
+    <h1>Room Booker</h1>
+    <h2>Meeting & Conference room booking system</h2>
+    <h4>A simple and free way to manage your company's space</h4>
+
+    
+    <button class="btn btn-warning font-weight-bold" (click)="scrollTo('info')">Learn More</button>
+  </div>
+
+  <div class="hero-shape">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+      <polygon fill="white" points="0,100 100,0 100,100"/>
+    </svg>
+  </div>
+</div>
+
+<div id="info-container">
+  <div id="info" class="row text-center">
+    <div class="col-12">
+      <h2>Booking Your Meetings</h2>
+      <h5>Quickly and easily book your office space using our system.</h5>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <h2><fa-icon [icon]="faUserShield"></fa-icon></h2>
+      <h3>User Management</h3>
+      <h5>
+        Each company has a Master account which can manage its users and revoke access to specific accounts at anytime. This will also remove any meetings the revoked account created.
+      </h5>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <h2><fa-icon [icon]="faUsers"></fa-icon></h2>
+      <h3>Personnel Assignment</h3>
+      <h5>
+        Easily communicate with your team with the ability to assign personnel to a specific booking instance as well as add a small description of what the meeting is about.
+      </h5>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <h2><fa-icon [icon]="faBell"></fa-icon></h2>
+      <h3>Account Notifications</h3>
+      <h5>
+        With our custom notification system whenever a user is added or removed from a meeting or the meeting is canceled, they will receive an alert letting them know what happened.
+      </h5>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <h2><fa-icon [icon]="faBrush"></fa-icon></h2>
+      <h3>Color Coded Statuses</h3>
+      <h5>
+        Tell what a room's status is at a glance with our color coded badges each room receives.
+      </h5>
+      <ul class="color-codes">
+        <li class="color-free">Free</li>
+        <li class="color-progress">In-Progress</li>
+        <li class="color-booked">Booked</li>
+      </ul>
+    </div>
+  </div>
+</div>

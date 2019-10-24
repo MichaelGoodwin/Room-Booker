@@ -9,12 +9,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
+// Views
+import { HomeComponent } from './views/home/home.component';
+
 @NgModule({
   declarations: [
     AppComponent,
 
     // Global components
-    NavbarComponent
+    NavbarComponent,
+
+    // Views
+    HomeComponent
   ],
   imports: [
     BrowserModule,
