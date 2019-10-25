@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AlertsComponent } from './alerts/alerts.component';
 
 // Views
 import { HomeComponent } from './views/home/home.component';
@@ -18,6 +19,7 @@ import { HomeComponent } from './views/home/home.component';
 
     // Global components
     NavbarComponent,
+    AlertsComponent,
 
     // Views
     HomeComponent
