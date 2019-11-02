@@ -1,0 +1,22 @@
+$form-background-color: #3d3d3d;
+$form-max-width: 600px;
+
+form{
+  background-color: $form-background-color;
+  max-width: $form-max-width;
+  padding: 10px;
+  border-radius: 3px;
+  margin: 5px auto;
+}
+
+form input, form textarea{
+  width: 100%;
+}
+
+.alert{
+  font-weight: bold;
+  margin-top: 2px;
+  padding: .5rem 1rem;
+  border: none;
+  font-size: .9rem;
+}

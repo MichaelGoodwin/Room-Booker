@@ -1,0 +1,57 @@
+<form [formGroup]="form" (ngSubmit)="register()">
+  <h1 class="text-center">Room Booker</h1>
+  <hr/>
+  <h3>Create an Account</h3>
+  <div class="form-group">
+    <label for="username">Username:</label>
+    <input id="username" type="text" formControlName="username">
+    <div class="errorContainer" *ngIf="fControls.username.invalid && (fControls.username.touched || submitted)">
+      <div *ngIf="fControls.username.errors" class="alert alert-danger">
+        <span *ngIf="fControls.username.errors.required">Please enter your desired username</span>
+        <span *ngIf="fControls.username.errors.minlength">Your username must be at least 3 characters long</span>
+        <span *ngIf="fControls.username.errors.maxlength">Your username can be at most 16 characters long</span>
+        <span *ngIf="fControls.username.errors.taken">This username is already taken</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email Address:</label>
+    <input id="email" type="email" formControlName="email">
+
+    <div class="errorContainer" *ngIf="fControls.email.invalid && (fControls.email.touched || submitted)">
+      <div *ngIf="fControls.email.errors" class="alert alert-danger">
+        <span *ngIf="fControls.email.errors.required">Please enter your email address</span>
+        <span *ngIf="fControls.email.errors.email">This must be a valid email address</span>
+        <span *ngIf="fControls.email.errors.taken">This email already has an account registered to it</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input id="password" type="password" formControlName="password">
+
+    <div class="errorContainer" *ngIf="fControls.password.invalid && (fControls.password.touched || submitted)">
+      <div *ngIf="fControls.password.errors" class="alert alert-danger">
+        <span *ngIf="fControls.password.errors.required">Please enter your desired password</span>
+        <span *ngIf="fControls.password.errors.minlength">Your password must be at least 8 characters long</span>
+        <span *ngIf="fControls.password.errors.maxlength">Your password can be at most 255 characters long</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="confirmPassword">Confirm Password:</label>
+    <input id="confirmPassword" type="password" formControlName="confirmPassword">
+
+    <div class="errorContainer" *ngIf="fControls.confirmPassword.invalid && (fControls.confirmPassword.touched || submitted)">
+      <div *ngIf="fControls.confirmPassword.errors" class="alert alert-danger">
+        <span *ngIf="fControls.confirmPassword.errors.required">Please confirm your password</span>
+        <span *ngIf="fControls.confirmPassword.errors.mustMatch">Your passwords do not match</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary btn-block" type="submit" [disabled]="processing">Register</button>
+</form>

@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="login()">
+  <h1 class="text-center">Room Booker</h1>
+  <hr/>
+  <h3>Login</h3>
+  <div class="form-group">
+    <label for="username">Username/Email Address:</label>
+    <input id="username" type="text" formControlName="username">
+
+    <div class="errorContainer" *ngIf="fControls.username.invalid && fControls.username.touched">
+      <div *ngIf="fControls.username.errors" class="alert alert-danger">
+        <span *ngIf="fControls.username.errors.required">Please enter your username or email address</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input id="password" type="password" formControlName="password">
+
+    <div class="errorContainer" *ngIf="fControls.password.invalid && fControls.password.touched">
+      <div *ngIf="fControls.password.errors" class="alert alert-danger">
+        <span *ngIf="fControls.password.errors.required">Please enter your password</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary btn-block" type="submit" [disabled]="processing">Login</button>
+</form>
