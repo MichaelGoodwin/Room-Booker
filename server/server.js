@@ -9,6 +9,7 @@ const morgan          = require('morgan');           // Used to log to the serve
 const mongoose        = require('mongoose');         // ODM Library for MongoDB
 const session         = require('express-session');  // Used to save the user session
 const MongoStore      = require('connect-mongo')(session); // MongoDB session store for Connect and Express
+const passport        = require('passport');         // Used to Authenticate user logins
 
 // Pull config file based on environment settings
 const isProdEnv       = process.env.NODE_ENV === 'production';
@@ -46,6 +47,15 @@ app.use(session({
     touchAfter: 300         // Limit session re-saving to once every 5 minutes unless session data changes
   })
 }));
+
+// Configure passport.
+require('./config/passport.js');
+
+app.use(passport.initialize());
+app.use(passport.session());      // Passport piggybacks off express sessions
+
+// Initialize all express routes
+require('./routes/routes.js')(app);
 
 // Connect to the database and then start the server
 mongoose.connect(config.database.url, config.database.options)
