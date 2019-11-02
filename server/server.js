@@ -21,7 +21,7 @@ const app             = express();
 
 console.log('Server is configured to run in ' + (isProdEnv ? 'production' : 'development') + ' mode using the config file located at ' + configFilePath);
 
-app.use(express.static(__dirname + '../Room-Booker/dist/Room-Booker'));  // Exposes the angular app content
+app.use(express.static(path.join(__dirname, '../Room-Booker/dist/Room-Booker')));  // Exposes the angular app content
 app.use(bodyParser.urlencoded({'extended': 'true'}));                   // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                             // parse application/json
 app.use(methodOverride());                                              // Adds support for HTTP verbs such as PUT/DELETE in places where the client doesn't support it.
