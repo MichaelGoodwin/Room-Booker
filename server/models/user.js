@@ -24,10 +24,8 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    minlength: [8, 'Your password must be at least 8 characters long.'],
-    maxlength: [255, 'Your password can only be 255 characters long.'],
-    required: [true, 'Please enter a password.'],
-    trim: true
+    // Length validation should be handled client-side since hashing will allow it to pass mongoose validators
+    required: [true, 'Please enter a password.']
   },
   username: {
     type: String,

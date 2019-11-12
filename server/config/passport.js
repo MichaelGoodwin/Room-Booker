@@ -27,13 +27,17 @@ passport.use('local-signup', new LocalStrategy({
     data: {}
   };
 
+  if (!req.body.username) {
+    results.message = 'Missing username';
+    return done(null, results);
+  }
+
   // lowercase the necessary values
   const lowerCasedEmail = email.toLowerCase();
   const lowerCasedUsername = req.body.username.toLowerCase();
   
   User.find({ $or: [{'username': lowerCasedUsername}, {'email': lowerCasedEmail}] }, (err, users) => {
     if (err) {
-      console.log('Error looking for user while signing up');
       return done(err);
     }
 
@@ -55,9 +59,7 @@ passport.use('local-signup', new LocalStrategy({
       return done(null, results);
     }
 
-    // No user was found, lets create a new entry.
-    console.log('creating new user with the username: ' + lowerCasedUsername);
-    
+    // No user was found, lets create a new entry.    
     const newUser = new User({
       email: lowerCasedEmail,
       username: lowerCasedUsername,
@@ -110,7 +112,6 @@ passport.use('local-login', new LocalStrategy({}, (email, password, done) => {
 
     user.compareLocalPassword(password, (err, correct) => {
       if (err){
-        console.log('Error comparing password');
         return done(err);
       }
 
