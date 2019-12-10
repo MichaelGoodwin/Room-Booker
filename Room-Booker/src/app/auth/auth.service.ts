@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AlertsService } from 'src/app/services/alerts/alerts.service';
+import { AlertsService } from 'src/app/alerts/alerts.service';
 import { Router } from '@angular/router';
 import { ApiResponse } from 'src/app/services/api/ApiResponse';
 import { ErrorMessage, SuccessMessage } from 'src/app/messages';
@@ -19,7 +19,7 @@ export class AuthService {
 
   constructor(private alertService: AlertsService, private http: HttpClient, private router: Router) { }
 
-  async login(data: ApiResponse): Promise<boolean> {
+  async login(data: any): Promise<boolean> {
     try {
       const response = await this.http.post<ApiResponse>('/api/login', data).toPromise();
 

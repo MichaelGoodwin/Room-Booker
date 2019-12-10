@@ -3,10 +3,10 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ErrorMessage, SuccessMessage } from 'src/app/messages';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AlertsService } from 'src/app/services/alerts/alerts.service';
+import { AlertsService } from 'src/app/alerts/alerts.service';
 import { ApiResponse } from 'src/app/services/api/ApiResponse';
-import { Alert } from 'src/app/services/alerts/alert';
-import { AlertType } from 'src/app/services/alerts/alert-type';
+import { Alert } from 'src/app/alerts/alert';
+import { AlertType } from 'src/app/alerts/alert-type';
 
 @Component({
   selector: 'app-register-form',

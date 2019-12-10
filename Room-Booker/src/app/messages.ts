@@ -1,7 +1,7 @@
 'use strict';
 // tslint:disable:max-line-length
-import { Alert } from './services/alerts/alert';
-import { AlertType } from './services/alerts/alert-type';
+import { Alert } from './alerts/alert';
+import { AlertType } from './alerts/alert-type';
 
 export class ErrorMessage {
   static readonly CONNECTION_ERROR: Alert = new Alert('Error communicating with the server, please try again', AlertType.DANGER);
