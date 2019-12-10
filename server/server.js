@@ -15,7 +15,7 @@ const app             = express();
 
 // Pull config file based on environment settings
 let configFilePath;
-switch (process.env.NODE_ENV === null ? 'dev' : process.env.NODE_ENV.toLowerCase()) {
+switch (process.env.NODE_ENV === undefined ? 'dev' : process.env.NODE_ENV.toLowerCase()) {
   case 'production': 
     configFilePath = './secure/config.js';
     break;
