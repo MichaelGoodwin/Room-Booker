@@ -10,16 +10,28 @@ const mongoose        = require('mongoose');         // ODM Library for MongoDB
 const session         = require('express-session');  // Used to save the user session
 const MongoStore      = require('connect-mongo')(session); // MongoDB session store for Connect and Express
 const passport        = require('passport');         // Used to Authenticate user logins
-
-// Pull config file based on environment settings
-const isProdEnv       = process.env.NODE_ENV === 'production';
-const configFilePath  = isProdEnv ? './secure/config.js' : './config.dev.js';
-const config          = require(configFilePath);
-
 const port            = process.env.PORT || 8000;     // Port to open the server on.
 const app             = express();
 
-console.log('Server is configured to run in ' + (isProdEnv ? 'production' : 'development') + ' mode using the config file located at ' + configFilePath);
+// Pull config file based on environment settings
+let configFilePath;
+switch (process.env.NODE_ENV === null ? 'dev' : process.env.NODE_ENV.toLowerCase()) {
+  case 'production': 
+    configFilePath = './secure/config.js';
+    break;
+  case 'test':
+  case 'testing':
+    configFilePath = './config.testing.js';
+    break;
+  case 'dev':
+  case 'development':
+  default:
+    configFilePath = './config.dev.js';
+    app.use(morgan('dev'));
+}
+
+const config          = require(configFilePath);
+console.log('Server is configured to run using the config file located at ' + configFilePath);
 
 app.use(express.static(path.join(__dirname, '../Room-Booker/dist/Room-Booker')));  // Exposes the angular app content
 app.use(bodyParser.urlencoded({'extended': 'true'}));                   // parse application/x-www-form-urlencoded
@@ -30,9 +42,6 @@ app.use(methodOverride());                                              // Adds 
 app.use(morgan(config.morgan.format, {
   stream: fs.createWriteStream(path.join(__dirname, config.morgan.filename), { flags: 'a'})
 }));
-if (!isProdEnv) {
-  app.use(morgan('dev'));
-}
 
 app.use(session({ 
   resave: true,             // Save session even if unmodified
@@ -50,29 +59,26 @@ app.use(session({
 
 // Configure passport.
 require('./config/passport.js');
-
 app.use(passport.initialize());
 app.use(passport.session());      // Passport piggybacks off express sessions
 
 // Initialize all express routes
 require('./routes/routes.js')(app);
 
-// Connect to the database and then start the server
-mongoose.connect(config.database.url, config.database.options)
-  .then(() => {
-    console.log('Successfully connected to MongoDB');
-
-    app.listen(port, () => {
-      console.log(`Server is now listening on port: ${port}`);
-
-      // Disable console.log while in production to minimize unnecessary logging
-      if (isProdEnv) {
-        console.log('Server is in production mode, console.log is now disabled');
-        console.log = (d) => {};
-      }
+// Export app for integration tests as a promise
+module.exports = new Promise((resolve, reject) => {
+  // Connect to the database and then start the server
+  mongoose.connect(config.database.url, config.database.options)
+    .then(() => {
+      console.log('Successfully connected to MongoDB');
+      app.server = app.listen(port, () => {
+        console.log(`Server is now listening on port: ${port}`);
+        resolve(app);
+      });
+    })
+    .catch((e) => {
+      console.error(e);
+      console.log('Error connecting to database, aborting attempt to start server');
+      reject(e);
     });
-  })
-  .catch((e) => {
-    console.error(e);
-    console.log('Error connecting to database, aborting attempt to start server');
-  });
+});

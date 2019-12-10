@@ -2,16 +2,38 @@ language: node_js
 node_js:
   - "10"
 dist: trusty
-sudo: required
+os: "linux"
 
 branches:
   only:
-  - master
+    - master
 
-before_script:
-  - cd Room-Booker/
-  - npm install
-  
-script:
-  - ng lint
-  - ng build --prod
+jobs:
+  include:
+    - stage: "Tests"
+      name: "Linting"
+      before_script:
+        - cd Room-Booker/
+        - npm install
+      script:
+        - ng lint
+
+    - name: "Integration tests"
+      services: mongodb
+      env:
+        - PORT=8888
+        - NODE_ENV="test"
+      before_script:
+        - cd server/
+        - npm install
+        - sleep 15 # Give MongoDB time to start
+      script:
+        - npm run mocha
+
+    - stage: "Deployment"
+      name: "Building production app"
+      before_script:
+        - cd Room-Booker/
+        - npm install
+      script:
+        - ng build --prod
