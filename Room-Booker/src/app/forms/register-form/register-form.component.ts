@@ -80,7 +80,7 @@ export class RegisterFormComponent implements OnInit {
       }
 
       if (response.success) {
-        this.router.navigate(['login']);
+        this.router.navigate(['dashboard']);
         this.alertsService.addMessage(SuccessMessage.ACCOUNT_CREATED);
         return;
       }

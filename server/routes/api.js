@@ -21,7 +21,11 @@ router.post('/register', (req, res, next) => {
       return next(err);
     }
 
-    return res.json(response);
+    if (!response.success) {
+      return res.json(response);
+    }
+    
+    req.login(response.data, (ignored) => res.json(response));
   })(req, res, next);
 });
 
